@@ -9,6 +9,7 @@ export default function Header({ $target, initialState, onKeywordInput }) {
   this.state = initialState;
 
   this.setState = (nextState) => {
+    if(this.state.keyword === nextState.keyword) return;
     this.state = nextState;
 
     keyword.setState({
@@ -24,7 +25,7 @@ export default function Header({ $target, initialState, onKeywordInput }) {
   const keyword = new Keyword({
     $target: $header,
     initialState: {
-      keyword: this.state.keyword
+      value: this.state.keyword
     },
     onKeywordInput,
   });

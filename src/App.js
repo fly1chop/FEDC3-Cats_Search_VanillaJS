@@ -10,7 +10,10 @@ export default function App({ $target }) {
 
   this.setState = (nextState) => {
     this.state = nextState;
-    suggestKeywords.setState(this.state.keywords)
+    header.setState({
+      keyword: this.state.keyword
+    })
+    suggestKeywords.setState(this.state.keywords);
   }
 
   const header = new Header({ 
@@ -30,3 +33,14 @@ export default function App({ $target }) {
     } 
   });
 
+  const suggestKeywords = new SuggestKeywords({
+    $target,
+    initialState: this.state.keywords,
+    onKeywordSelect: (keyword) => {
+      this.setState({
+        ...this.state,
+        keyword
+      })
+    }
+  })
+}
